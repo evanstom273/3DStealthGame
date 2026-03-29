@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://deahw6biqjyqs"]
 
+[ext_resource type="Texture2D" uid="uid://b1gp58h42purc" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_amhp1"]
 [ext_resource type="PackedScene" uid="uid://bwa4rq2wl88c2" path="res://Assets/Models/Characters/Player.tscn" id="1_woa84"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_woa84"]
@@ -17,6 +18,10 @@ glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_amhp1"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4obp"]
+albedo_texture = ExtResource("1_amhp1")
+uv1_triplanar = true
+
 [node name="Main" type="Node3D" unique_id=1729820246]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1122666330]
@@ -30,6 +35,7 @@ shadow_enabled = true
 transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
 use_collision = true
 mesh = SubResource("BoxMesh_amhp1")
+material = SubResource("StandardMaterial3D_u4obp")
 
 [node name="PlayerCharacter" parent="." unique_id=164628998 instance=ExtResource("1_woa84")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

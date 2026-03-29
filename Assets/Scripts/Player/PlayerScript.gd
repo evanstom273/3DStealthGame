@@ -13,6 +13,11 @@ extends CharacterBody3D
 @export var MOUSE_SENS = 0.002
 @export var CROUCH_LERP_SPEED = 10.0
 
+@export_group("Camera")
+@export var BASE_FOV = 75.0
+@export var SPRINT_FOV = 90.0
+@export var FOV_LERP_SPEED = 8.0
+
 @export_group("Headbob")
 @export var BOB_FREQ = 2.4
 @export var BOB_AMP = 0.08
@@ -89,15 +94,23 @@ func _physics_process(delta: float) -> void:
         velocity.y = JUMP_VELOCITY
 
     # 5. Handle Sprinting
+    var input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackwards")
+    var target_fov = BASE_FOV
+
     if Input.is_action_pressed("Sprint") and not is_crouching:
         current_speed = SPRINT_SPEED
+        # Only widen FOV if we are actually giving movement input
+        if input_dir.length() > 0.1:
+            target_fov = SPRINT_FOV
     elif is_crouching:
         current_speed = CROUCH_SPEED
     else:
         current_speed = WALK_SPEED
 
+    # Apply FOV change
+    camera.fov = lerp(camera.fov, target_fov, delta * FOV_LERP_SPEED)
+
     # 6. Movement Logic (Acceleration / Friction)
-    var input_dir = Input.get_vector("MoveLeft", "MoveRight", "MoveForward", "MoveBackwards")
     var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
     
     if direction:
