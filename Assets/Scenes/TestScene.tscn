@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://deahw6biqjyqs"]
+
+[ext_resource type="PackedScene" uid="uid://bwa4rq2wl88c2" path="res://Assets/Models/Characters/Player.tscn" id="1_woa84"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_woa84"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_amhp1"]
+sky_material = SubResource("ProceduralSkyMaterial_woa84")
+
+[sub_resource type="Environment" id="Environment_u4obp"]
+background_mode = 2
+sky = SubResource("Sky_amhp1")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_amhp1"]
+
+[node name="Main" type="Node3D" unique_id=1729820246]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1122666330]
+environment = SubResource("Environment_u4obp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=783941649]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1631126198]
+transform = Transform3D(10, 0, 0, 0, 0.1, 0, 0, 0, 10, 0, 0, 0)
+use_collision = true
+mesh = SubResource("BoxMesh_amhp1")
+
+[node name="PlayerCharacter" parent="." unique_id=164628998 instance=ExtResource("1_woa84")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

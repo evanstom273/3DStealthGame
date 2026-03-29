@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bwa4rq2wl88c2"]
+
+[ext_resource type="Script" uid="uid://clev60of7iu5y" path="res://Assets/Scripts/Player/PlayerScript.gd" id="1_3ki14"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d64qq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ki14"]
+
+[node name="PlayerCharacter" type="CharacterBody3D" node_paths=PackedStringArray("neck", "camera", "mesh", "collision", "crouch_ray") unique_id=164628998]
+script = ExtResource("1_3ki14")
+neck = NodePath("Neck")
+camera = NodePath("Neck/Camera3D")
+mesh = NodePath("MeshInstance3D")
+collision = NodePath("CollisionShape3D")
+crouch_ray = NodePath("CrouchRay")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1517614087]
+mesh = SubResource("CapsuleMesh_d64qq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=147137542]
+shape = SubResource("CapsuleShape3D_3ki14")
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Neck" unique_id=1581949983]
+
+[node name="CrouchRay" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, 1.5, 0)
